@@ -12,11 +12,15 @@ class IssuesController < ApplicationController
 
 	def create
 		@issue = Issue.new(issue_params)
+		respond_to do |format|
+			if @issue.save
+				format.html {redirect_to @issue, notice: "Issue succesfully created."}
+				format.json {head :no_content}
+			else
+				format.html {render action: 'new'}
+				format.json { render json: @issue.errors, status: :unprocessable_entity }
+			end
 
-		if @issue.save
-			redirect_to issue_path(@issue), notice: "Issue #{@issue.title} successfully Created."
-		else
-			redirect_to new_issue_path
 		end
 	end
 
@@ -27,11 +31,15 @@ class IssuesController < ApplicationController
 	end
 
 	def update
-		@issue.update(issue_params)
-
-		flash.notice = "Issue '#{@issue.title}' Updated!"
-
-  		redirect_to issue_path(@issue)
+	    respond_to do |format|
+	      if @issue.update(issue_params)
+	        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+	        format.json { head :no_content }
+	      else
+	        format.html { render action: 'edit' }
+	        format.json { render json: @issue.errors, status: :unprocessable_entity }
+	      end
+	    end
 	end
 
 	def destroy
