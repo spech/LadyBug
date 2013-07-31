@@ -1,0 +1,6 @@
+<h1><%=@issue.title%></h1>
+
+<p><%= @issue.description %></p>
+
+<%= link_to "edit", edit_issue_path(@issue) %> |
+<%= link_to "delete", issue_path(@issue), method: :delete, data: {confirm: "Really delete the issue?"} %> <br/>

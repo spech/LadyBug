@@ -1,0 +1,9 @@
+<h1> Issue list </h1>
+<ul>
+<% @issues.each do |issue| %>
+	<li>
+		<%= link_to issue.title, issue_path(issue) %>
+	</li>
+<% end %>
+</ul>
+<%= link_to "Create a New Issue", new_issue_path, class: "new_issue" %>
