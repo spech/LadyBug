@@ -1,0 +1,8 @@
+<legend>Edit Project</legend>
+
+<%= render partial: 'form' %>
+
+<%= link_to(project_path(@project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
+  	<i class="icon-trash icon-white"></i>
+<%end%> <br/>
+<%= link_to 'Back', projects_path %>

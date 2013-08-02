@@ -1,0 +1,9 @@
+<h1><%=@project.name%></h1>
+
+<p><%= @project.description %></p>
+
+<%= link_to 'edit', edit_project_path(@project), class: "btn btn-info btn-mini" %>
+<%= link_to(project_path(@project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
+  	<i class="icon-trash icon-white"></i>
+<%end%>
+<br />

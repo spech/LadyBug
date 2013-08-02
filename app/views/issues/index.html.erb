@@ -12,7 +12,7 @@
   			<TH> 
   				<div class="pull-right">
   				<%= link_to 'edit', edit_issue_path(issue), class: "btn btn-info btn-mini" %>  
-  				<%= link_to(issue_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-danger btn-mini") do %>
+  				<%= link_to(issue_path(issue), method: :delete, data: {confirm: "Really delete the issue?"}, class: "btn btn-danger btn-mini") do %>
   					<i class="icon-trash icon-white"></i>
 				<%end%>
 			</div>
