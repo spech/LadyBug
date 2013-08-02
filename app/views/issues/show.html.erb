@@ -2,6 +2,14 @@
 
 <p><%= @issue.description %></p>
 
-<%= link_to "edit", edit_issue_path(@issue) %> |
-<%= link_to "back", issues_path %> |
-<%= link_to "delete", issue_path(@issue), method: :delete, data: {confirm: "Really delete the issue?"} %> <br/>
+<%= link_to 'edit', edit_issue_path(@issue), class: "btn btn-info btn-mini" %>
+<%= link_to(issue_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-danger btn-mini") do %>
+  	<i class="icon-trash icon-white"></i>
+<%end%>
+<br />
+
+<ul class="pager pager-inverse">
+  <li><%= link_to "Issues list", issues_path %></li>
+  <li class="previous"><%= link_to 'Previous', issue_path(@issue.prev) %></li>
+  <li class="next"><%= link_to 'Next', issue_path(@issue.next)%></li>
+</ul>

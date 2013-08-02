@@ -1,9 +1,24 @@
 <h1> Issue list </h1>
-<ul>
-<% @issues.each do |issue| %>
-	<li>
-		<%= link_to issue.title, issue_path(issue) %>
-	</li>
-<% end %>
-</ul>
-<%= link_to "Create a New Issue", new_issue_path, class: "new_issue" %>
+<table class="table table-hover table-striped">
+	<TR> 
+ 		<TH> Issue ID </TH> 
+ 		<TH> Title </TH> 
+ 		<TH> Actions </TH>
+  	</TR>
+  	<% @issues.each do |issue| %>
+  		<TR>
+  			<TH> <%= link_to issue.id, issue_path(issue) %> </TH>
+  			<TH> <%= issue.title %> </TH>
+  			<TH> 
+  				<div class="pull-right">
+  				<%= link_to 'edit', edit_issue_path(issue), class: "btn btn-info btn-mini" %>  
+  				<%= link_to(issue_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-danger btn-mini") do %>
+  					<i class="icon-trash icon-white"></i>
+				<%end%>
+			</div>
+  			</TH>
+  		</TR>
+  	<%end%>
+</table>
+<%= link_to "Create a New Issue", new_issue_path, class: "btn btn-primary"%>
+

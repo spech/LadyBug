@@ -4,15 +4,10 @@
     		<li><%= error %></li>
   		<% end %>
   	</ul>
-  	<p>
-    	<%= f.label :title %><br />
-    	<%= f.text_field :title %>
-  	</p>
-  	<p>
-    	<%= f.label :description %><br />
-    	<%= f.text_area :description %>
-  	</p>
-  	<p>
-    	<%= f.submit %>
-  	</p>
+    	<%= f.label :title, class: 'strong' %>
+    	<%= f.text_field :title, placeholder: "Enter issue title", class: "span12" %>
+    	<%= f.label :description %>
+    	<%= f.text_area :description, placeholder: "Enter a description", class: "span12" ,rows: "9" %>
+    	<%= f.submit 'Save', class: "btn btn-primary" %>
+      <%= link_to 'Cancel', issues_path, class: "btn" %>
 <% end %>

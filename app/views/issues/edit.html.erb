@@ -1,3 +1,8 @@
-<h1> Edit issue</h1>
+<legend> Edit issue</legend>
 
 <%= render partial: 'form' %>
+
+<%= link_to(issue_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-danger btn-mini") do %>
+  	<i class="icon-trash icon-white"></i>
+<%end%> <br/>
+<%= link_to 'Back', issues_path %>
