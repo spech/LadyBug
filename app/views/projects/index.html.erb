@@ -1,21 +1,20 @@
-<h1> Project list </h1>
-<table class="table table-hover table-striped">
-	<TR> 
- 		<TH> Name </TH> 
- 		<TH> Actions </TH>
-  	</TR>
-  	<% @projects.each do |project| %>
-  		<TR>
-  			<TH> <%= link_to project.name, project_path(project) %> </TH>
-  			<TH> 
-  				<div class="pull-right">
-  				<%= link_to 'edit', edit_project_path(project), class: "btn btn-info btn-mini" %>  
-  				<%= link_to(project_path(project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
-  					<i class="icon-trash icon-white"></i>
-				<%end%>
-			</div>
-  			</TH>
-  		</TR>
-  	<%end%>
-</table>
+<legend>Project list</legend>
+<ul class="thumbnails">
+  <% @projects.each do |project| %>
+
+    <li class="span4">
+      <div class="thumbnail">
+        <h3><%= link_to project.name, project_path(project) %></h3>
+        <p class="muted">
+          <%= project.description %>
+        </p>
+        <p>
+          <%= link_to 'edit', edit_project_path(project), class: "btn btn-info btn-mini" %>  
+          <%= link_to(project_path(project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
+              <i class="icon-trash icon-white"></i>
+          <%end%>
+        </p>
+    </li>
+  <%end%>
+</ul>
 <%= link_to "Create a New Project", new_project_path, class: "btn btn-primary"%>

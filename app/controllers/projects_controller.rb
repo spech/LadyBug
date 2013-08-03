@@ -50,14 +50,6 @@ class ProjectsController < ApplicationController
 		redirect_to projects_path 
 	end
 
-	def next
-	    Issue.where("id > ?", self.id).first
-	end
-
-	def prev
-    	Issue.where("id < ?", self.id).last
-	end
-
 	private	
 	def project_params
 		params.require(:project).permit(:name, :description)
