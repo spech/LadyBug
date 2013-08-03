@@ -8,7 +8,7 @@
   	<% @issues.each do |issue| %>
   		<TR>
   			<TH> <%= link_to issue.id, issue_path(issue) %> </TH>
-  			<TH> <%= issue.title %> </TH>
+  			<TH> <%= link_to issue.title, issue_path(issue) %> </TH>
   			<TH> 
   				<div class="pull-right">
   				<%= link_to 'edit', edit_issue_path(issue), class: "btn btn-info btn-mini" %>  

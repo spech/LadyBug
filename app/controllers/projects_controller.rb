@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 		@project = Project.new(project_params)
 		respond_to do |format|
 			if @project.save
-				format.html {redirect_to @project, notice: "Project succesfully created."}
+				format.html {redirect_to @project, flash: { success: "Project succesfully created."}}
 				format.json {head :no_content}
 			else
 				format.html {render action: 'new'}
@@ -45,9 +45,17 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project.destroy
 
-		flash.notice = "Project '#{@project.title}' Deleted!"
+		flash[:error] = "Project '#{@project.name}' Deleted!"
 
 		redirect_to projects_path 
+	end
+
+	def next
+	    Issue.where("id > ?", self.id).first
+	end
+
+	def prev
+    	Issue.where("id < ?", self.id).last
 	end
 
 	private	
