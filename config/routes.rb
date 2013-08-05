@@ -1,6 +1,8 @@
 LadyBug::Application.routes.draw do
 
-  resources :issues
+  resources :issues do
+    resources :notes
+  end
 
   resources :projects
 

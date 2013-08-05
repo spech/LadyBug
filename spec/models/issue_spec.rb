@@ -9,7 +9,7 @@ describe Issue do
 
 	it 'should create a new valid issue.' do
 		expect(issue).to be_valid
-  	end
+  end
 
   	it 'should not create an issue without a title.' do
   		issue.title = nil

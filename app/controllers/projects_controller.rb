@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
 	def destroy
 		@project.destroy
 
-		flash[:error] = "Project '#{@project.name}' Deleted!"
+		flash[:error] = "Project #{@project.name} Deleted!"
 
 		redirect_to projects_path 
 	end

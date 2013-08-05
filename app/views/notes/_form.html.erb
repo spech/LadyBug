@@ -1,0 +1,9 @@
+<h5>Post a Note:</h5>
+<%= form_for [ @issue, @note ] do |f| %>
+  <p>
+    <%= f.text_area :body ,class: "span12"%>
+  </p>
+  <p>
+    <%= f.submit 'Submit', class: "btn btn-primary"  %>
+  </p>
+<% end %>

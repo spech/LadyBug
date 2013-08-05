@@ -1,10 +1,12 @@
 <h1> Issue list </h1>
 <table class="table table-hover table-striped">
+  <thead>
 	<TR> 
  		<TH> Issue ID </TH> 
  		<TH> Title </TH> 
  		<TH> Actions </TH>
-  	</TR>
+  </TR>
+  </thead>
   	<% @issues.each do |issue| %>
   		<TR>
   			<TH> <%= link_to issue.id, issue_path(issue) %> </TH>

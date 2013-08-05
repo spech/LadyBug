@@ -1,7 +1,7 @@
 <%= form_for @issue do |f| %>
 	<ul>
   		<% @issue.errors.full_messages.each do |error| %>
-    		<li><%= error %></li>
+    		<li><span class="text-error"><%= error %></span></li>
   		<% end %>
   </ul>
   <%= f.label :title, class: 'strong' %>

@@ -25,6 +25,8 @@ class IssuesController < ApplicationController
 	end
 
 	def show
+		@note = Note.new
+		@note.issue_id = @issue.id
 	end
 
 	def edit
@@ -45,7 +47,7 @@ class IssuesController < ApplicationController
 	def destroy
 		@issue.destroy
 
-		flash[:error]= "Article '#{@issue.title}' Deleted!"
+		flash[:error]= "Issue '#{@issue.title}' Deleted!"
 
 		redirect_to issues_path 
 	end
