@@ -2,6 +2,64 @@ class Issue < ActiveRecord::Base
 	validates :title, :description, presence: true
 	has_many :notes
 
+	state_machine :initial => :new do
+		state :new, value: 0
+		state :analysed, value: 1
+		state :assigned, value: 2
+		state :updated, value: 3
+		state :reviewed, value: 4
+		state :validated, value: 5
+		state :resolved, value: 6
+		state :cancelled, value: 7
+		state :closed, value: 8
+		state :rejected, value: 9
+		state :reopened, value: 10
+
+		event :analyse do
+			transition [:new, :reopened] => :analysed
+		end
+
+		state :analysed do
+			validates :analysis, presence: true
+		end
+
+		event :assign do
+			transition :analysed => :assigned
+		end
+
+		event :update do
+			transition :assigned => :updated
+		end
+
+		event :review do
+			transition :updated => :reviewed
+		end
+
+		event :validate do
+			transition :reviewed => :validated
+		end
+
+		event :resolve do
+			transition :validated => :resolved
+		end
+
+		event :close do
+			transition :resolved => :closed
+		end
+
+		event :reopen do
+			transition [:closed, :cancelled] => :reopened
+		end
+
+		event :cancel do
+			transition all => :cancelled
+		end
+
+		event :reject do
+			transition :analysed => :rejected
+		end
+  	end
+
 	def next
 	    Issue.where("id > ?", self.id).first || Issue.first
 	end

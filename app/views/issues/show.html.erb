@@ -4,9 +4,42 @@
   <li class="next"><%= link_to 'Next', issue_path(@issue.next)%></li>
 </ul>
 
-<h1><%=@issue.title%></h1>
+<legend>
+	<span class='<%= state_label(@issue.state_name)%>'>
+		<%= @issue.state_name %>
+	</span> 
+	<%=@issue.title%>
+</legend>
 
-<p><%= @issue.description %></p>
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Description:
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        <%= @issue.description %>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        Analysis:
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%= @issue.analysis %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render partial: 'change_state' %>
 
 <%= link_to 'edit', edit_issue_path(@issue), class: "btn btn-info btn-mini" %>
 <%= link_to(issue_path(@issue), method: :delete, data: {confirm: "Really delete the issue?"}, class: "btn btn-danger btn-mini") do %>

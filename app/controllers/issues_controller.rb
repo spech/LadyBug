@@ -35,6 +35,7 @@ class IssuesController < ApplicationController
 	def update
 	    respond_to do |format|
 	      if @issue.update(issue_params)
+	      	@issue.fire_state_event(params[:issue][:state_event]) if params[:issue][:state_event]
 	        format.html { redirect_to @issue, :flash => { :success => 'Issue was successfully updated.' }}
 	        format.json { head :no_content }
 	      else
@@ -45,6 +46,7 @@ class IssuesController < ApplicationController
 	end
 
 	def destroy
+		@issue.notes.destroy_all
 		@issue.destroy
 
 		flash[:error]= "Issue '#{@issue.title}' Deleted!"
@@ -55,7 +57,6 @@ class IssuesController < ApplicationController
 	private
 	def issue_params
 		params.require(:issue).permit(:title, :description)
-		
 	end
 
 	def find_issue

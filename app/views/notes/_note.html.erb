@@ -1,8 +1,8 @@
 <blockquote>
 	<small>Created at <%= note.created_at%> by PLACEHOLDER</small>
   	<%= note.body %>
-
 </blockquote>
+
 <%= link_to(issue_note_path(note.issue, note), method: :delete, data: {confirm: "Really delete the note?"}, class: "btn btn-danger btn-mini") do %>
   	<i class="icon-trash icon-white"></i>
 <%end%></br>

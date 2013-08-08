@@ -1,4 +1,4 @@
 class Note < ActiveRecord::Base
-	validates :body, presence: true
-  belongs_to :issue
+	validates :body, :issue_id, presence: true
+ 	belongs_to :issue
 end
