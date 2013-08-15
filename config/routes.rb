@@ -4,7 +4,9 @@ LadyBug::Application.routes.draw do
     resources :notes
   end
 
-  resources :projects
+  resources :projects do 
+    resources :versions    
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

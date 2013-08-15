@@ -1,6 +1,7 @@
 class Issue < ActiveRecord::Base
 	validates :title, :description, presence: true
 	has_many :notes
+	belongs_to :project
 
 	state_machine :initial => :new do
 		state :new, value: 0

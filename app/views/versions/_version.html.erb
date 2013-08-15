@@ -1,0 +1,21 @@
+<li>
+	<span class='<%= version_label(version.state_name)%>'>
+		<%= version.number %>
+
+	<%if version.state_name != :delivered %>
+		<%= form_for [version.project, version], url: project_version_path(version.project,version) do |f| %>
+			<ul>
+		  		<% version.errors.full_messages.each do |error| %>
+		    		<li><span class="text-error"><%= error %></span></li>
+		  		<% end %>
+		  	</ul>
+		  	<strong>change state:</strong>
+			<%= f.collection_select :state_event, version.state_transitions, :event, :human_to_name %>
+			<%= f.submit 'change version state', class: "btn btn-mini" %>
+		<% end %>
+		<%= link_to(project_version_path(version.project, version), method: :delete, data: {confirm: "Really delete the version?"}, class: "btn btn-danger btn-mini") do %>
+  			<i class="icon-trash icon-white"></i>
+		<%end%>
+	<%end%>
+	</span>
+</li> 

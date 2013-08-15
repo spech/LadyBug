@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
 	before_filter :find_project, except: [:index, :new, :create]
+	before_filter :define_version, only: [:show, :update]
 
 	def index
 		@projects = Project.all
@@ -31,6 +32,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def update
+		fails
 		respond_to do |format|
 		    if @project.update(project_params)
 		    	format.html { redirect_to @project, notice: 'project was successfully updated.' }
@@ -57,5 +59,10 @@ class ProjectsController < ApplicationController
 
 	def find_project
 		@project = Project.find(params[:id])
+	end
+
+	def define_version
+		@version = Version.new
+		@version.project_id = @project.id
 	end
 end

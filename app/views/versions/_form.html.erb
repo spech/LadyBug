@@ -1,0 +1,14 @@
+<h5>Plan a new version:</h5>
+<%=  form_for [@project, @version] do |f| %>
+	<ul>
+		<% @version.errors.full_messages.each do |error| %>
+		   	<li><span class="text-error"><%= error %></span></li>
+		<% end %>
+	</ul>
+  <p>
+    <%= f.text_field :number %>
+  </p>
+  <p>
+    <%= f.submit 'Create', class: "btn btn-mini btn-primary"  %>
+  </p>
+<% end %>

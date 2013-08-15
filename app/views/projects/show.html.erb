@@ -1,4 +1,4 @@
-<h1><%=@project.name%></h1>
+<legend><%=@project.name%></legend>
 
 <p><%= @project.description %></p>
 
@@ -7,4 +7,10 @@
   	<i class="icon-trash icon-white"></i>
 <%end%>
 <br />
+<legend><%=@project.name%>'s versions</legend>
+<ul class="inline">
+<%= render partial: 'versions/version', collection: @project.versions %>
+</ul>
+<%= render partial: 'versions/form' %>
+
 <%= link_to 'Back', projects_path %>
