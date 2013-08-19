@@ -32,7 +32,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def update
-		fails
 		respond_to do |format|
 		    if @project.update(project_params)
 		    	format.html { redirect_to @project, notice: 'project was successfully updated.' }

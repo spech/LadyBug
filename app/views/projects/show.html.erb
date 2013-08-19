@@ -9,7 +9,7 @@
 <br />
 <legend><%=@project.name%>'s versions</legend>
 <ul class="inline">
-<%= render partial: 'versions/version', collection: @project.versions %>
+	<%= render partial: 'versions/version', collection: @project.versions %>
 </ul>
 <%= render partial: 'versions/form' %>
 

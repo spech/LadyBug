@@ -3,7 +3,7 @@
 		<%= version.number %>
 
 	<%if version.state_name != :delivered %>
-		<%= form_for [version.project, version], url: project_version_path(version.project,version) do |f| %>
+		<%= form_for version, url: project_version_path(@project, version) do |f| %>
 			<ul>
 		  		<% version.errors.full_messages.each do |error| %>
 		    		<li><span class="text-error"><%= error %></span></li>
