@@ -44,6 +44,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def destroy
+		@project.versions.destroy_all
 		@project.destroy
 
 		flash[:error] = "Project #{@project.name} Deleted!"

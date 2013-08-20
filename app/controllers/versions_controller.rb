@@ -9,7 +9,8 @@ class VersionsController < ApplicationController
 			redirect_to project_path(@version.project_id)
 			flash[:success] = "Version Created"
 		else
-			render @version.project
+			@project = Project.find(params[:project_id])
+			render 'projects/show'
 		end
 	end
 
@@ -19,7 +20,8 @@ class VersionsController < ApplicationController
 			if @version.fire_state_event(params[:version][:state_event])
 				redirect_to @version.project, flash: {success: 'Version state updated.'}
 			else
-				render action: 'projects/show', id: version.project
+				@project = Project.find(params[:project_id])
+				render 'projects/show'
 			end
 		end
 	end
