@@ -1,5 +1,5 @@
 <h5>Post a Note:</h5>
-<%=  form_for [@issue, @note] do |f| %>
+<%=  form_for @note, url: project_issue_notes_path(@project,@issue) do |f| %>
   <p>
     <%= f.text_area :body ,class: "span12"%>
   </p>

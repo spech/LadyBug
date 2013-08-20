@@ -6,3 +6,10 @@
   	<i class="icon-trash icon-white"></i>
 <%end%> <br/>
 <%= link_to 'Back', projects_path %>
+
+<legend><%=@project.name%>'s versions</legend>
+<ul class="inline">
+	<%= render partial: 'versions/version', collection: @project.versions %>
+</ul>
+
+<%= render partial: 'versions/form' %>

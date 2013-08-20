@@ -4,28 +4,31 @@ class IssuesController < ApplicationController
 	before_filter :define_note, only: [:show, :update]
 
 	def index
-		@issues = Issue.all
+		@project = Project.find(params[:project_id])
+		@issues = @project.issues
 	end	
 
 	def new
 		@issue = Issue.new
+		@project = Project.find(params[:project_id])
 	end
 
 	def create
 		@issue = Issue.new(issue_params)
+		@issue.project_id = Project.find(params[:project_id])
 		respond_to do |format|
 			if @issue.save
-				format.html {redirect_to @issue, :flash => { :success => "Issue succesfully created." } }
+				format.html {redirect_to project_issue_path(@issue.project, @issue), :flash => { :success => "Issue succesfully created." } }
 				format.json {head :no_content}
 			else
 				format.html { render action: 'new'}
 				format.json { render json: @issue.errors, status: :unprocessable_entity }
 			end
-
 		end
 	end
 
 	def show
+		@project = Project.find(params[:project_id])
 	end
 
 	def edit
@@ -50,7 +53,7 @@ class IssuesController < ApplicationController
 
 	def respond_update_success
 	  respond_to do |format|
-	    format.html { redirect_to @issue, :flash => { :success => 'Issue state was successfully updated.' }}
+	    format.html { redirect_to project_issue_path(@issue.project, @issue), :flash => { :success => 'Issue state was successfully updated.' }}
 	    format.json { head :no_content }
 	  end 
 	end

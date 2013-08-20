@@ -1,4 +1,4 @@
-<%= form_for @issue do |f| %>
+<%= form_for [@project, @issue] do |f| %>
 	<ul>
   		<% @issue.errors.full_messages.each do |error| %>
     		<li><span class="text-error"><%= error %></span></li>
@@ -11,5 +11,5 @@
   <%= f.label :analysis %>
   <%= f.text_area :analysis, placeholder: "Enter an analysis", class: "span12" ,rows: "9" %>
   <%= f.submit 'Save', class: "btn btn-primary" %>
-  <%= link_to 'Cancel', issues_path, class: "btn" %>
+  <%= link_to 'Cancel', @project, class: "btn" %>
 <% end %>

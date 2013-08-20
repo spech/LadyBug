@@ -1,11 +1,14 @@
 LadyBug::Application.routes.draw do
 
-  resources :issues do
-    resources :notes
-  end
+  #resources :issues do
+   # resources :notes
+  #end
 
   resources :projects do 
-    resources :versions    
+    resources :versions
+    resources :issues do
+      resources :notes
+    end   
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

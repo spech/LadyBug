@@ -1,7 +1,10 @@
 class Issue < ActiveRecord::Base
-	validates :title, :description, presence: true
+
 	has_many :notes
 	belongs_to :project
+
+	validates :title, :description, presence: true
+	validates_uniqueness_of :title, scope: :project_id
 
 	state_machine :initial => :new do
 		state :new, value: 0

@@ -1,5 +1,5 @@
 <h5>Plan a new version:</h5>
-<%=  form_for [@project, @version] do |f| %>
+<%=  form_for @version, url: project_versions_path(@project) do |f| %>
 	<ul>
 		<% @version.errors.full_messages.each do |error| %>
 		   	<li><span class="text-error"><%= error %></span></li>

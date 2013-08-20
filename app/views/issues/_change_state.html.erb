@@ -1,5 +1,5 @@
 <p>
-<%= form_for @issue do |f| %>
+<%= form_for [@project,@issue] do |f| %>
 	<ul>
   		<% @issue.errors.full_messages.each do |error| %>
     		<li><span class="text-error"><%= error %></span></li>

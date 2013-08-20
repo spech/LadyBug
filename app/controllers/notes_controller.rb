@@ -6,7 +6,9 @@ class NotesController < ApplicationController
 
  		@note.save
 
-  		redirect_to issue_path(@note.issue)
+ 		flash[:success]= "Note created!"
+
+  		redirect_to project_issue_path(@note.issue.project, @note.issue)
 	end
 
 	def destroy
@@ -15,7 +17,7 @@ class NotesController < ApplicationController
 
 		flash[:error]= "Note Deleted!"
 
-		redirect_to issue_path(@note.issue)
+		redirect_to project_issue_path(@note.issue.project, @note.issue)
 	end
 
 
