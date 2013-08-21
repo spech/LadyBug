@@ -3,7 +3,7 @@ class Issue < ActiveRecord::Base
 	has_many :notes
 	belongs_to :project
 
-	validates :title, :description, presence: true
+	validates :title, :description, :product_version, presence: true
 	validates_uniqueness_of :title, scope: :project_id
 
 	state_machine :initial => :new do

@@ -16,4 +16,16 @@ module IssuesHelper
 		end
 	end
 
+	def delivered_version(project)
+		project.versions.select do |version|
+			version.number if version.delivered?
+		end
+	end
+
+	def planned_ongoing_version(project)
+		project.versions.select do |version|
+			version.number if version.planned? or version.ongoing?
+		end
+	end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130814155318) do
+ActiveRecord::Schema.define(version: 20130821081921) do
 
   create_table "issues", force: true do |t|
     t.string   "title"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20130814155318) do
     t.integer  "state"
     t.text     "analysis"
     t.integer  "project_id"
+    t.string   "product_version"
   end
 
   create_table "notes", force: true do |t|
