@@ -15,7 +15,8 @@ class IssuesController < ApplicationController
 
 	def create
 		@issue = Issue.new(issue_params)
-		@issue.project_id = Project.find(params[:project_id])
+		@project = Project.find(params[:project_id])
+		@issue.project_id = @project.id
 		respond_to do |format|
 			if @issue.save
 				format.html {redirect_to project_issue_path(@issue.project, @issue), :flash => { :success => "Issue succesfully created." } }
