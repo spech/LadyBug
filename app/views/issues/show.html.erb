@@ -40,8 +40,9 @@
 
 
 <%= render partial: 'change_state' %>
+<%= render partial: 'versions'%>
 
-<%= link_to 'edit', project_issue_path(@project, @issue), class: "btn btn-info btn-mini" %>
+<%= link_to 'edit', edit_project_issue_path(@project, @issue), class: "btn btn-info btn-mini" %>
 <%= link_to(project_issue_path(@project, @issue), method: :delete, data: {confirm: "Really delete the issue?"}, class: "btn btn-danger btn-mini") do %>
   	<i class="icon-trash icon-white"></i>
 <%end%>

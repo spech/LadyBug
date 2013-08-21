@@ -6,7 +6,7 @@
   		<% end %>
   	</ul>
   	<strong>change state:</strong>
-	<%= f.collection_select :state_event, @issue.state_transitions, :event, :human_to_name %> <br/>
+	<%= f.collection_select :state_event, @issue.state_transitions, :event, :human_to_name %> 
 	<%= f.submit 'change issue state', class: "btn btn-mini btn-success" %>
 <% end %>
 </p>

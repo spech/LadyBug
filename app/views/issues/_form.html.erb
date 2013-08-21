@@ -8,6 +8,10 @@
   <%= f.text_field :title, placeholder: "Enter issue title", class: "span12"%>
   <%= f.label :description %>
   <%= f.text_area :description, placeholder: "Enter a description", class: "span12" ,rows: "9" %>
+  <%= f.label :product_version %>
+  <%= f.collection_select :product_version, delivered_version(@project), :id, :number%>
+  <%= f.label :severity %>
+  <%= f.select :severity, Issue::SEVERITY, { include_blank: true } %>
   <%= f.label :analysis %>
   <%= f.text_area :analysis, placeholder: "Enter an analysis", class: "span12" ,rows: "9" %>
   <%= f.submit 'Save', class: "btn btn-primary" %>

@@ -27,25 +27,28 @@ class IssuesController < ApplicationController
 	end
 
 	def show
+		@productversion = Version.find(@issue.product_version)
+		@targetversion = Version.find(@issue.target_version) if @issue.target_version
 	end
 
 	def edit
 	end
 
 	def update
-		if params[:issue][:state_event]
+		case params[:commit]
+		when "change issue state" then
 			if @issue.fire_state_event(params[:issue][:state_event]) 
-			  respond_update_success
+			  	respond_update_success
 			else
-			  respond_update_error 'show'
+			  	respond_update_error 'show'
 			end
 	    else
-	    if @issue.update(issue_params)
-	      @issue.fire_state_event(params[:issue][:state_event]) if params[:issue][:state_event]
-		    respond_update_success 
-		  else
-		    respond_update_error 'edit'
-		  end
+	    	if @issue.update(issue_params)
+	      		@issue.fire_state_event(params[:issue][:state_event]) if params[:issue][:state_event]
+		    	respond_update_success 
+		  	else
+		    	respond_update_error 'edit'
+		  	end
 		end
 	end
 
@@ -60,7 +63,7 @@ class IssuesController < ApplicationController
 
 	private
 	def issue_params
-		params.require(:issue).permit(:title, :description, :analysis, :product_version)
+		params.require(:issue).permit(:title, :description, :analysis, :product_version, :target_version)
 	end
 
 	def find_issue
@@ -78,7 +81,7 @@ class IssuesController < ApplicationController
 
 	def respond_update_success
 	  respond_to do |format|
-	    format.html { redirect_to project_issue_path(@issue.project, @issue), :flash => { :success => 'Issue state was successfully updated.' }}
+	    format.html { redirect_to project_issue_path(@project, @issue), :flash => { :success => 'Issue state was successfully updated.' }}
 	    format.json { head :no_content }
 	  end 
 	end

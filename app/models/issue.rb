@@ -6,11 +6,13 @@ class Issue < ActiveRecord::Base
 	validates :title, :description, :product_version, presence: true
 	validates_uniqueness_of :title, scope: :project_id
 
+	SEVERITY = [:critical, :minor, :cosmetic]
+
 	state_machine :initial => :new do
 		state :new, value: 0
 		state :analysed, value: 1
 		state :assigned, value: 2
-		state :updated, value: 3
+		state :corrected, value: 3
 		state :reviewed, value: 4
 		state :validated, value: 5
 		state :resolved, value: 6
@@ -31,12 +33,16 @@ class Issue < ActiveRecord::Base
 			transition :analysed => :assigned
 		end
 
-		event :update do
-			transition :assigned => :updated
+		state :assigned do 
+			validates :target_version, presence: true
+		end
+
+		event :correct do
+			transition :assigned => :corrected
 		end
 
 		event :review do
-			transition :updated => :reviewed
+			transition :corrected => :reviewed
 		end
 
 		event :validate do
