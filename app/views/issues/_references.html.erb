@@ -1,0 +1,20 @@
+<p>
+<% if @issue.review_ref.nil? or @issue.review_ref.empty?%>
+	<%= form_for [@project,@issue] do |f| %>
+		<%= f.text_field :review_ref%> 
+		<%= f.submit 'add review reference', class: "btn btn-mini btn-success" %>
+	<% end %>
+<%else%>
+	Review Reference: <%= @issue.review_ref %>
+<%end%>
+<p/>
+<p>
+<% if @issue.validation_ref.nil? or @issue.validation_ref.empty?%>
+	<%= form_for [@project,@issue] do |f| %>
+		<%= f.text_field :validation_ref%> 
+		<%= f.submit 'add validation reference', class: "btn btn-mini btn-success" %>
+	<% end %>
+<%else%>
+	Validation Reference: <%= @issue.validation_ref %>
+<%end%>
+</p>

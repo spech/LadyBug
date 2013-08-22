@@ -10,11 +10,17 @@
 	</span> 
 	<%=@issue.title%>
 </legend>
-
+<div class="progress progress-info progress-striped active">
+  <div class="bar" style="width: <%= progress(@issue.state_name)%>"><%= progress(@issue.state_name)%> Done</div>
+</div>
+<%= render partial: 'change_state' %>
+<%= render partial: 'versions'%>
+Severity: <%= @issue.severity %> <br/>
+Impact: <%= @issue.impact %>
 <div class="accordion" id="accordion2">
   <div class="accordion-group">
     <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+      <a class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
         Description:
       </a>
     </div>
@@ -26,7 +32,7 @@
   </div>
   <div class="accordion-group">
     <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+      <a class="accordion-toggle" data-toggle="collapse" href="#collapseTwo">
         Analysis:
       </a>
     </div>
@@ -36,11 +42,23 @@
       </div>
     </div>
   </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#collapseThree">
+        Correction:
+      </a>
+    </div>
+    <div id="collapseThree" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%= @issue.correction %>
+      </div>
+    </div>
+  </div>
 </div>
 
+<%= render partial: 'references' %>
 
-<%= render partial: 'change_state' %>
-<%= render partial: 'versions'%>
+
 
 <%= link_to 'edit', edit_project_issue_path(@project, @issue), class: "btn btn-info btn-mini" %>
 <%= link_to(project_issue_path(@project, @issue), method: :delete, data: {confirm: "Really delete the issue?"}, class: "btn btn-danger btn-mini") do %>

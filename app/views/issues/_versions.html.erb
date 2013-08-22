@@ -6,7 +6,7 @@ Target Version:
 <% else %>
     <span class='badge'>None</span>
 <%end%>
-<% if not Version.find(@issue.target_version).delivered? %>
+<%if @issue.target_version.nil? or Version.find(@issue.target_version).delivered? %>
 	<%= form_for [@project,@issue] do |f| %>
 		<%= f.collection_select :target_version, planned_ongoing_version(@project), :id, :number%> 
 		<%= f.submit 'set target version', class: "btn btn-mini btn-success" %>

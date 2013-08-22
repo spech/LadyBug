@@ -7,13 +7,21 @@
   <%= f.label :title, class: 'strong' %>
   <%= f.text_field :title, placeholder: "Enter issue title", class: "span12"%>
   <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "Enter a description", class: "span12" ,rows: "9" %>
+  <%= f.text_area :description, placeholder: "Enter issue description", class: "span12" %>
   <%= f.label :product_version %>
   <%= f.collection_select :product_version, delivered_version(@project), :id, :number%>
   <%= f.label :severity %>
-  <%= f.select :severity, Issue::SEVERITY, { include_blank: true } %>
+  <%= f.select :severity, Issue::SEVERITY %>
+  <%= f.label :impact %>
+  <%= f.select :impact, Issue::IMPACT%>
   <%= f.label :analysis %>
   <%= f.text_area :analysis, placeholder: "Enter an analysis", class: "span12" ,rows: "9" %>
+  <%= f.label :correction %>
+  <%= f.text_area :correction, placeholder: "Describe the correction and impacted files", class: "span12", rows: "9"%>
+  <%= f.label 'Review Reference'%>
+  <%= f.text_field :review_ref, placeholder: "Enter Review reference", class: "span12"%>
+  <%= f.label 'Validation Reference'%>
+  <%= f.text_field :validation_ref, placeholder: "Enter validation reference", class: "span12"%>
   <%= f.submit 'Save', class: "btn btn-primary" %>
   <%= link_to 'Cancel', @project, class: "btn" %>
 <% end %>

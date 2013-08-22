@@ -6,7 +6,8 @@ class Issue < ActiveRecord::Base
 	validates :title, :description, :product_version, presence: true
 	validates_uniqueness_of :title, scope: :project_id
 
-	SEVERITY = [:critical, :minor, :cosmetic]
+	SEVERITY = [:critical, :evolution, :minor, :cosmetic]
+	IMPACT = [:specification, :design, :code, :unit_test, :integration, :validation]
 
 	state_machine :initial => :new do
 		state :new, value: 0
@@ -26,7 +27,7 @@ class Issue < ActiveRecord::Base
 		end
 
 		state :analysed do
-			validates :analysis, presence: true
+			validates :analysis, :impact, presence: true
 		end
 
 		event :assign do
@@ -41,12 +42,24 @@ class Issue < ActiveRecord::Base
 			transition :assigned => :corrected
 		end
 
+		state :corrected do
+			validates :correction, presence: true
+		end
+
 		event :review do
 			transition :corrected => :reviewed
 		end
 
+		state :reviewed do
+			validates :review_ref, presence:true
+		end
+
 		event :validate do
 			transition :reviewed => :validated
+		end
+
+		state :validated do
+			validates :validation_ref, presence: true
 		end
 
 		event :resolve do
@@ -71,10 +84,10 @@ class Issue < ActiveRecord::Base
   	end
 
 	def next
-	    Issue.where("id > ?", self.id).first || Issue.first
+	    Issue.where("id > ? and project_id = ?", self.id, self.project_id).first
 	end
 
 	def prev
-    	Issue.where("id < ?", self.id).last || Issue.last
+    	Issue.where("id < ? and project_id = ?", self.id, self.project_id).last
 	end
 end

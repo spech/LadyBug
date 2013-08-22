@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821145805) do
+ActiveRecord::Schema.define(version: 20130822075534) do
 
   create_table "issues", force: true do |t|
     t.string   "title"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20130821145805) do
     t.integer  "product_version"
     t.integer  "target_version"
     t.string   "severity"
+    t.text     "correction"
+    t.string   "impact"
+    t.string   "review_ref"
+    t.string   "validation_ref"
   end
 
   create_table "notes", force: true do |t|

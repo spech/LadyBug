@@ -22,5 +22,9 @@ class Version < ActiveRecord::Base
 			transition :ongoing => :delivered
 		end
 
+		state :delivered do
+			
+		end
+
 	end
 end

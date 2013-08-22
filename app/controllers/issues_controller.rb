@@ -63,7 +63,10 @@ class IssuesController < ApplicationController
 
 	private
 	def issue_params
-		params.require(:issue).permit(:title, :description, :analysis, :product_version, :target_version)
+		params.require(:issue).permit(:title, :description, 
+			:analysis, :product_version, :target_version,
+			:severity, :impact, :correction,
+			:review_ref, :validation_ref)
 	end
 
 	def find_issue
