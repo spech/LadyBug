@@ -11,16 +11,16 @@ class Issue < ActiveRecord::Base
 
 	state_machine :initial => :new do
 		state :new, value: 0
-		state :analysed, value: 1
-		state :assigned, value: 2
-		state :corrected, value: 3
-		state :reviewed, value: 4
-		state :validated, value: 5
-		state :resolved, value: 6
-		state :cancelled, value: 7
-		state :closed, value: 8
-		state :rejected, value: 9
-		state :reopened, value: 10
+		state :reopened, value: 1
+		state :analysed, value: 2
+		state :assigned, value: 3
+		state :corrected, value: 4
+		state :reviewed, value: 5
+		state :validated, value: 6
+		state :closed, value: 7
+
+		state :cancelled, value: -1
+
 
 		event :analyse do
 			transition [:new, :reopened] => :analysed
@@ -62,12 +62,9 @@ class Issue < ActiveRecord::Base
 			validates :validation_ref, presence: true
 		end
 
-		event :resolve do
-			transition :validated => :resolved
-		end
 
 		event :close do
-			transition :resolved => :closed
+			transition :validated => :closed
 		end
 
 		event :reopen do
@@ -75,12 +72,10 @@ class Issue < ActiveRecord::Base
 		end
 
 		event :cancel do
-			transition all => :cancelled
+			transition all - [:corrected,:reviewed,:validated,:closed]=> :cancelled
 		end
 
-		event :reject do
-			transition :analysed => :rejected
-		end
+
   	end
 
 	def next

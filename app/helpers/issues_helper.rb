@@ -8,10 +8,8 @@ module IssuesHelper
 			when :corrected then "label label-warning"
 			when :reviewed then "label label-warning"
 			when :validated then "label label-info"
-			when :resolved then "label label-success"
 			when :cancelled then "label"
 			when :closed then "label label-inverse"
-			when :rejected then "label"
 			when :reopened then "label label-important" 
 		end
 	end
@@ -24,10 +22,8 @@ module IssuesHelper
 			when :corrected then "60%"
 			when :reviewed then "70%"
 			when :validated then "80%"
-			when :resolved then "90%"
 			when :cancelled then "0%"
 			when :closed then "100%"
-			when :rejected then "0%"
 			when :reopened then "10%" 
 		end
 	end
@@ -40,9 +36,9 @@ module IssuesHelper
 		end
 	end
 
-	def planned_ongoing_version(project)
+	def planned_version(project)
 		project.versions.select do |version|
-			version.number if version.planned? or version.ongoing?
+			version.number if version.planned? 
 		end
 	end
 

@@ -18,10 +18,15 @@
   <%= f.text_area :analysis, placeholder: "Enter an analysis", class: "span12" ,rows: "9" %>
   <%= f.label :correction %>
   <%= f.text_area :correction, placeholder: "Describe the correction and impacted files", class: "span12", rows: "9"%>
-  <%= f.label 'Review Reference'%>
-  <%= f.text_field :review_ref, placeholder: "Enter Review reference", class: "span12"%>
-  <%= f.label 'Validation Reference'%>
-  <%= f.text_field :validation_ref, placeholder: "Enter validation reference", class: "span12"%>
+  <% if not @issue.review_ref.nil? %>
+    <%= f.label 'Review reference'%>
+    <%= f.text_field :review_ref%>
+  <% end %>
+  <% if not @issue.validation_ref.nil? %>
+    <%= f.label 'validation reference'%>
+    <%= f.text_field :review_ref%>
+  <% end %>
+
   <%= f.submit 'Save', class: "btn btn-primary" %>
   <%= link_to 'Cancel', @project, class: "btn" %>
 <% end %>
