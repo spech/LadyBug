@@ -1,24 +1,24 @@
-<% if @issue.state >= 4 %>
-	<p>
+<dl class="dl-horizontal ">
+	<% if @issue.state >= 4 %>
 		<% if @issue.review_ref.nil? or @issue.review_ref.empty?%>
 			<%= form_for [@project,@issue] do |f| %>
 				<%= f.text_field :review_ref%> 
-				<%= f.submit 'add review reference', class: "btn btn-mini btn-success" %>
-			<% end %>
-		<%else%>
-			Review Reference: <%= @issue.review_ref %>
-		<%end%>
-	<p/>
+				<%= f.submit 'add review reference', class: "btn btn-success" %>
+		<% end %>
+	<%else%>
+		<dt>Review Reference:</dt>
+		<dd><%= @issue.review_ref %></dd>
+	<%end%>
 <%end%>
 <% if @issue.state >= 5 %>
-	<p>
-		<% if @issue.validation_ref.nil? or @issue.validation_ref.empty?%>
-			<%= form_for [@project,@issue] do |f| %>
-				<%= f.text_field :validation_ref%> 
-				<%= f.submit 'add validation reference', class: "btn btn-mini btn-success" %>
-			<% end %>
-		<%else%>
-			Validation Reference: <%= @issue.validation_ref %>
-		<%end%>
-	</p>
+	<% if @issue.validation_ref.nil? or @issue.validation_ref.empty?%>
+		<%= form_for [@project,@issue] do |f| %>
+			<%= f.text_field :validation_ref%> 
+			<%= f.submit 'add validation reference', class: "btn btn-success" %>
+		<% end %>
+	<%else%>
+		<dt>Validation Reference:</dt>
+		<dd><%= @issue.validation_ref %></dd>
+	<%end%>
 <%end%>
+</dl>

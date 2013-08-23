@@ -7,19 +7,10 @@ class Version < ActiveRecord::Base
 
 	state_machine :initial => :planned do
 		state :planned, value: 0
-		state :ongoing, value: 1
 		state :delivered, value: 2
 
 		event :go do
-			transition :planned => :ongoing
-		end
-
-		event :postpone do
-			transition :ongoing => :planned
-		end
-
-		event :deliver do
-			transition :ongoing => :delivered
+			transition :planned => :delivered
 		end
 
 

@@ -1,15 +1,20 @@
-<p>
-Product Version: <span class='<%=version_badge(Version.find(@issue.product_version).state_name)%>'> <%=Version.find(@issue.product_version).number%> </span> <br/>
-Target Version: 
-<% if @issue.target_version %>
-	<span class='<%=version_badge(Version.find(@issue.target_version).state_name)%>'> <%=Version.find(@issue.target_version).number%> </span>
-<% else %>
-    <span class='badge'>None</span>
-<%end%>
+<dl class="dl-horizontal ">
+	<dt>Product Version:</dt> 
+	<dd>
+		<span class='<%=version_badge(Version.find(@issue.product_version).state_name)%>'> <%=Version.find(@issue.product_version).number%> </span> 
+	</dd>
+	<dt>Target Version:</dt>
+	<dd>
+		<% if @issue.target_version %>
+			<span class='<%=version_badge(Version.find(@issue.target_version).state_name)%>'> <%=Version.find(@issue.target_version).number%> </span>
+		<% else %>
+		    <span class='badge'>None</span>
+		<%end%>
+	</dd>
 <%if @issue.target_version.nil? or Version.find(@issue.target_version).delivered? %>
 	<%= form_for [@project,@issue] do |f| %>
 		<%= f.collection_select :target_version, planned_version(@project), :id, :number%> 
 		<%= f.submit 'set target version', class: "btn btn-mini btn-success" %>
 	<% end %>
 <% end %>
-</p>
+</dl>

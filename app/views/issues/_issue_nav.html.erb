@@ -1,0 +1,5 @@
+<ul class="pager pager-inverse">
+  <li><%= link_to "Issues list", project_path(@issue.project) %></li>
+  <li class="previous"><%= link_to 'Previous', project_issue_path(@project,@issue.prev) %></li>
+  <li class="next"><%= link_to 'Next', project_issue_path(@project, @issue.next)%></li>
+</ul>

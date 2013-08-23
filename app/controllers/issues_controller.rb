@@ -53,12 +53,17 @@ class IssuesController < ApplicationController
 	end
 
 	def destroy
-		@issue.notes.destroy_all
-		@issue.destroy
+		if @issue.state >= 4 #:corrected
+			flash[:error]= "cannot deleted Issue '#{@issue.title}' because it is already corrected!"
+			redirect_to project_issue_path(@project, @issue)
+		else
+			@issue.notes.destroy_all
+			@issue.destroy
 
-		flash[:error]= "Issue '#{@issue.title}' Deleted!"
+			flash[:error]= "Issue '#{@issue.title}' Deleted!"
 
-		redirect_to project_issues_path(@project) 
+			redirect_to project_issues_path(@project) 
+		end
 	end
 
 	private

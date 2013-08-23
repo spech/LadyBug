@@ -1,4 +1,3 @@
-<p>
 <%= form_for [@project,@issue] do |f| %>
 	<ul>
   		<% @issue.errors.full_messages.each do |error| %>
@@ -6,6 +5,5 @@
   		<% end %>
   	</ul>
 	<%= f.collection_select :state_event, @issue.state_transitions, :event, :human_to_name %> 
-	<%= f.submit 'change issue state', class: "btn btn-mini btn-success" %>
+	<%= f.submit 'change issue state', class: "btn btn-success" %>
 <% end %>
-</p>
