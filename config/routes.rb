@@ -1,8 +1,8 @@
 LadyBug::Application.routes.draw do
 
-  #resources :issues do
-   # resources :notes
-  #end
+  devise_for :users
+  
+  root :to => "projects#index"
 
   resources :projects do 
     resources :versions
