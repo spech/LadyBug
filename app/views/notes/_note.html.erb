@@ -1,5 +1,5 @@
 <blockquote>
-	<small>Created at <%= note.created_at%> by PLACEHOLDER</small>
+	<small>Created at <%= note.created_at%> by <%= User.find(note.user_id).email%></small>
   	<%= note.body %>
 </blockquote>
 

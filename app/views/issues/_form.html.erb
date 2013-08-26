@@ -7,7 +7,7 @@
   <%= f.label :title, class: 'strong' %>
   <%= f.text_field :title, placeholder: "Enter issue title", class: "span12"%>
   <%= f.label :description %>
-  <%= f.text_area :description, placeholder: "Enter issue description", class: "span12" %>
+  <%= f.text_area :description, placeholder: "Enter issue description", class: "span12", rows: '9' %>
   <%= f.label :product_version %>
   <%= f.collection_select :product_version, delivered_version(@project), :id, :number%>
   <%= f.label :severity %>

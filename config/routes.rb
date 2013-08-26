@@ -1,8 +1,8 @@
 LadyBug::Application.routes.draw do
 
-  devise_for :users
-  
-  root :to => "projects#index"
+  devise_for :users do
+    root to: "devise/sessions#new"
+  end
 
   resources :projects do 
     resources :versions

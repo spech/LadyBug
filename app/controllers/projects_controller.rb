@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
 	before_filter :find_project, except: [:index, :new, :create]
 	before_filter :define_version, only: [:show, :update, :edit]
+	before_filter :authenticate_user!
 
 	def index
 		@projects = Project.all

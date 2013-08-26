@@ -1,5 +1,7 @@
 class VersionsController < ApplicationController
 
+	before_filter :authenticate_user!
+
 	def create
   		@version = Version.new(version_params)
   		@version.project_id = params[:project_id]
@@ -15,7 +17,7 @@ class VersionsController < ApplicationController
 
 	def update
 		@version = Version.find(params[:id])
-		case params[:commit] 
+		case params[:commit]
 		when "change version state" then
 			if params[:version][:state_event] == 'deliver'
 				@issues_not_closed = all_issue_not_closed
