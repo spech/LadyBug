@@ -33,7 +33,6 @@
 <%= render partial: 'collapse'%>
 <%= link_to 'edit issue', edit_project_issue_path(@project, @issue), class: "btn btn-primary" %>
 <div>
-<legend>Notes:</legend>
 	<%= render partial: 'notes/form' %>
 	<%= render partial: 'notes/note', collection: @issue.notes %>
 </div>

@@ -5,6 +5,7 @@ gem 'rails', '4.0.0'
 
 gem 'state_machine'
 gem 'devise'
+gem 'kaminari'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

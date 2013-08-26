@@ -2,8 +2,9 @@ class IssuesController < ApplicationController
 
 	before_filter :find_issue, except: [:index, :new, :create]
 	before_filter :define_note, only: [:show, :update]
-	before_filter :define_project, except: []
-
+	before_filter :define_project
+	before_filter :authenticate_user!
+	
 	def index
 		@issues = @project.issues
 	end	

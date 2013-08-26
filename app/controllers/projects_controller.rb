@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
+		@project_issues = @project.issues.order(:state).page(params[:page]).per(1)
 	end
 
 	def edit

@@ -1,4 +1,4 @@
-<h5>Post a Note:</h5>
+<legend>Post a Note:</legend>
 <%=  form_for @note, url: project_issue_notes_path(@project,@issue) do |f| %>
   <p>
     <%= f.text_area :body ,class: "span12"%>
