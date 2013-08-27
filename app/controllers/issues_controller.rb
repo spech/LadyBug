@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
 
-	before_filter :find_issue, except: [:index, :new, :create]
+	before_filter :find_issue, except: [:index, :new, :create, :search]
 	before_filter :define_note, only: [:show, :update]
 	before_filter :define_project
 	before_filter :authenticate_user!
@@ -30,6 +30,14 @@ class IssuesController < ApplicationController
 	def show
 		@productversion = Version.find(@issue.product_version)
 		@targetversion = Version.find(@issue.target_version) if @issue.target_version
+	end
+
+	def search
+		@search = @project.issues.search(params[:q])
+		@project_issues = @search.result.page(params[:page]).per(25)
+		@search.build_condition if @search.conditions.empty?
+  		@search.build_sort if @search.sorts.empty?
+		render 'projects/show'
 	end
 
 	def edit

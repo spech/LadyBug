@@ -78,6 +78,10 @@ class Issue < ActiveRecord::Base
 
   	end
 
+  	def self.ransackable_attributes(auth_object = nil)
+    	super - ['project_id']
+  	end
+
 	def next
 	    Issue.where("id > ? and project_id = ?", self.id, self.project_id).first
 	end

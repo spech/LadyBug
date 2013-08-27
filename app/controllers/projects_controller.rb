@@ -27,7 +27,10 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project_issues = @project.issues.order(:state).page(params[:page]).per(1)
+		@search = @project.issues.search(params[:q])
+		@project_issues = @project.issues.page(params[:page]).per(25)
+		@search.build_condition if @search.conditions.empty?
+  		@search.build_sort if @search.sorts.empty?
 	end
 
 	def edit

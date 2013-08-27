@@ -7,6 +7,9 @@ LadyBug::Application.routes.draw do
   resources :projects do 
     resources :versions
     resources :issues do
+      collection do
+        match 'search' => 'issues#search', via: [:get, :post], as: :search
+      end
       resources :notes
     end   
   end
