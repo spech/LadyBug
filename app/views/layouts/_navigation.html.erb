@@ -4,6 +4,9 @@
 <ul class="nav pull-right">
   <% if user_signed_in? %>
   	 <li class="navbar-text">Welcome <%=current_user.email%>!</li>
+  	 <% if can? :manage, User %>
+  	 	<li><%= link_to "User Admin", users_path %> </li>
+  	 <% end %>
   	 <li><%= link_to "Log out", destroy_user_session_path, method: :delete%></li>
   <% else %>
   	<li><%= link_to "Log in", new_user_session_path %></li>

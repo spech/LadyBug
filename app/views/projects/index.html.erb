@@ -1,31 +1,32 @@
 <legend>Project list</legend>
 <ul class="thumbnails">
   <% @projects.each do |project| %>
+    <%if can? :read, project %>
+      <li class="span4">
+        <div class="thumbnail">
+          <h3><%= link_to project.name, project_path(project) %></h3>
+          <p class="muted">
+            <%= project.description %>
+          </p>
 
-    <li class="span4">
-      <div class="thumbnail">
-        <h3><%= link_to project.name, project_path(project) %></h3>
-        <p class="muted">
-          <%= project.description %>
-        </p>
-
-        <ul>
-          <% project.issues.order(:state).each do |issue| %>
-            <li>
-              <%= link_to issue.title, project_issue_path(project,issue)%>
-              <span class='<%= state_label(issue.state_name)%>'>
-                <%= issue.state_name %>
-              </span> 
-            </li>
-          <%end%>
-        </ul>
-        <p>
-          <%= link_to 'edit', edit_project_path(project), class: "btn btn-info btn-mini" %>  
-          <%= link_to(project_path(project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
-              <i class="icon-trash icon-white"></i>
-          <%end%>
-        </p>
-    </li>
+          <ul>
+            <% project.issues.order(:state).each do |issue| %>
+              <li>
+                <%= link_to issue.title, project_issue_path(project,issue)%>
+                <span class='<%= state_label(issue.state_name)%>'>
+                  <%= issue.state_name %>
+                </span> 
+              </li>
+            <%end%>
+          </ul>
+          <p>
+            <%= link_to 'edit', edit_project_path(project), class: "btn btn-info btn-mini" %>  
+            <%= link_to(project_path(project), method: :delete, data: {confirm: "Really delete the project?"}, class: "btn btn-danger btn-mini") do %>
+                <i class="icon-trash icon-white"></i>
+            <%end%>
+          </p>
+      </li>
+    <%end%>
   <%end%>
 </ul>
 <%= link_to "Create a New Project", new_project_path, class: "btn btn-primary"%>

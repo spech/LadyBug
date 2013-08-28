@@ -4,6 +4,10 @@ LadyBug::Application.routes.draw do
     root to: "devise/sessions#new"
   end
 
+  resources :users do
+    match 'add_role' => 'user#add_role', via: :patch
+  end
+
   resources :projects do 
     resources :versions
     resources :issues do

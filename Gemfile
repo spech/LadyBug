@@ -4,7 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 gem 'state_machine'
+
 gem 'devise'
+gem 'cancan'
+gem 'rolify'
+
 gem 'kaminari'
 
 gem 'ransack'

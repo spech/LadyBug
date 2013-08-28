@@ -10,6 +10,10 @@
   <%= f.text_area :description, placeholder: "Enter issue description", class: "span12", rows: '9' %>
   <%= f.label :product_version %>
   <%= f.collection_select :product_version, delivered_version(@project), :id, :number%>
+  <%if @issue.state >= 2%>
+    <%= f.label :target_version %>
+    <%= f.collection_select :target_version, planned_version(@project), :id, :number%>
+  <% end %>
   <%= f.label :severity %>
   <%= f.select :severity, Issue::SEVERITY %>
   <%= f.label :impact %>
