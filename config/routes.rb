@@ -5,7 +5,8 @@ LadyBug::Application.routes.draw do
   end
 
   resources :users do
-    match 'add_role' => 'user#add_role', via: :patch
+    match 'add_role' => 'users#add_role', via: :post
+    match 'remove_role' => 'users#remove_role', via: :post
   end
 
   resources :projects do 
