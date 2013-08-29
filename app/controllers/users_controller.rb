@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-	before_filter :find_user, except: [:index, :new, :create]
+	before_filter :authenticate_user!
+	before_filter :find_user, except: [:index, :new, :create, :add_role, :remove_role]
 	before_filter :define_role, only: [:index]
 
 	def index
@@ -32,8 +33,29 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def remove_role
+		@user = User.find(params[:user_id])
+		@project = Project.find(params[:project_id]) if not params[:project_id].empty?
+		@user.remove_role params[:role], @project
+		flash[:alert] = 'Role has been removed from user.'
+		redirect_to users_path
+	end
+
 	def add_role
-		@user.add_role params[:role], params[:project]
+		@user = User.find(params[:user_id])
+		@project = Project.find(params[:project_id])
+		if @user.has_role? params[:role] or @user.has_role? params[:role], @project
+			flash[:alert] = 'role already assigned to user.'
+		else
+			case params[:role]
+			when :admin
+				@user.add_role params[:role]
+			else
+				@user.add_role params[:role], @project
+			end
+			flash[:success] = 'role successfully added to user.'
+		end
+
 		redirect_to users_path 
 	end
 

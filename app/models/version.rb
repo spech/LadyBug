@@ -9,7 +9,7 @@ class Version < ActiveRecord::Base
 		state :planned, value: 0
 		state :delivered, value: 2
 
-		event :go do
+		event :deliver do
 			transition :planned => :delivered
 		end
 

@@ -1,28 +1,42 @@
 <legend> Manage Users </legend>
 
-<%= search_form_for @search do |f| %>
-	<%= f.label :email_cont %>
-	<%= f.text_field :email_cont %>
-	<%= f.submit "search", class: 'btn' %>
-<%end%>
+<%= render partial: 'search' %>
 
 <%= paginate @users %>
-<ul>
-	<% @users.each do |user| %>
-	<li> 
-		<%= user.email %>
-		<ul>
-		<% user.roles.each do |role| %>
-            
-			<li><%= role.name %></li>
-			<% if not role.resource_type.nil? %>
-				<ul>
-					<li><%= Object.const_get(role.resource_type).find(role.resource_id).name %></li>
-				</ul>
-			<% end %>
-		<% end %>
-		</ul>
-	</li>
-	<% end %>
-</ul>
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+  	<% @users.each do |user| %>
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" href="#<%=user.id%>">
+        <b><%= user.email %></b>
+      </a>
+    </div>
+    <div id="<%=user.id%>" class="accordion-body collapse">
+      <div class="accordion-inner">
+  			<% user.roles.each do |role| %>
+  			<li>
+          <%= role.name %>
+        </li>
+    			<% if not role.resource_type.nil? %>
+    				<ul>
+    					<li><%= Object.const_get(role.resource_type).find(role.resource_id).name %></li>
+    				</ul>
+    			<% end %>
+          <%= form_tag ("/users/#{user.id}/remove_role") do %>
+            <%= hidden_field_tag 'role', role.name %>
+            <%= hidden_field_tag 'project_id', role.resource_id %>
+            <%= submit_tag 'remove role', class: 'btn' %>
+          <%end%>
+        <%end%>
+        <%= form_tag ("/users/#{user.id}/add_role") do %>
+          <%= select_tag 'role',  options_for_select(User::ROLES) %>
+          <%= select_tag 'project_id', options_for_select(Project.all.collect {|p| [p.name, p.id] }) %>
+          <%= submit_tag 'add role', class: 'btn' %>
+        <%end%>
+      </div>
+    </div>
+    <%end%>
+  </div>
+</div>
 <%= link_to 'New user', new_user_path, class: 'btn btn-primary' %>
