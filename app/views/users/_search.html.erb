@@ -1,0 +1,5 @@
+<%= search_form_for @search do |f| %>
+	<%= f.label :email_cont %>
+	<%= f.text_field :email_cont %>
+	<%= f.submit "search", class: 'btn' %>
+<%end%>
