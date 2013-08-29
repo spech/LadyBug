@@ -30,14 +30,15 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     user ||=User.new
     if user.has_role? :admin
-        can :manager, :all 
+        can :manage, :all
     else
         can [:read, :update], Project, id: Project.with_role(:project_manager, user).map(&:id)
         can [:create,:read, :update, :assign], Issue, project_id: Project.with_role(:project_manager, user).map(&:id)
+
         can [:read], Project, id: Project.with_role(:developper).map(&:id)
         can [:create, :read, :update], Issue, project_id: Project.with_role(:developper, user).map(&:id)
         can [:read], Project, id: Project.with_role(:quality).map(&:id)
-        can [:read, :close], Issue, project_id: Project.with_role(:quality, user).map(&:id)
+        can [:read, :close], Issue, project_id: Project.with_role(:integrator, user).map(&:id)
     end
   end
 end
