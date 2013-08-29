@@ -37,6 +37,7 @@ class Ability
 
         can [:read], Project, id: Project.with_role(:developper).map(&:id)
         can [:create, :read, :update], Issue, project_id: Project.with_role(:developper, user).map(&:id)
+        
         can [:read], Project, id: Project.with_role(:quality).map(&:id)
         can [:read, :close], Issue, project_id: Project.with_role(:integrator, user).map(&:id)
     end

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		respond_to do |format|
 			if @user.save
-				format.html {redirect_to @user, flash: { success: "User succesfully created."}}
+				format.html {redirect_to users_path, flash: { success: "User succesfully created."}}
 				format.json {head :no_content}
 			else
 				format.html {render action: 'new'}

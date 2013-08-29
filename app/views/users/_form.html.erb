@@ -1,7 +1,17 @@
 <%= form_for @user do |f| %>
-
+	<ul>
+  		<% @user.errors.full_messages.each do |error| %>
+    		<li><%= error %></li>
+  		<% end %>
+  	</ul>
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
+
+    <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
 
   <%= f.submit "Save", class: 'btn' %>
  <%end%>
